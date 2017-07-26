@@ -1,13 +1,9 @@
-from django.conf import settings
-
-
 # List of known proxy server(s)
-IPWARE_TRUSTED_PROXY_LIST = getattr(settings, 'IPWARE_TRUSTED_PROXY_LIST', [])
+IPWARE_TRUSTED_PROXY_LIST = []
 
 # Search for the real IP address in the following order
 # Configurable via settings.py
-IPWARE_META_PRECEDENCE_ORDER = getattr(settings,
-    'IPWARE_META_PRECEDENCE_ORDER', (
+IPWARE_META_PRECEDENCE_ORDER = (
         'HTTP_X_FORWARDED_FOR', 'X_FORWARDED_FOR',  # (client, proxy1, proxy2) OR (proxy2, proxy1, client)
         'HTTP_CLIENT_IP',
         'HTTP_X_REAL_IP',
@@ -18,7 +14,6 @@ IPWARE_META_PRECEDENCE_ORDER = getattr(settings,
         'HTTP_VIA',
         'REMOTE_ADDR',
     )
-)
 
 # Private IP addresses
 # http://en.wikipedia.org/wiki/List_of_assigned_/8_IPv4_address_blocks
@@ -26,8 +21,7 @@ IPWARE_META_PRECEDENCE_ORDER = getattr(settings,
 # http://www.ietf.org/rfc/rfc5156.txt (IPv6)
 # Regex would be ideal here, but this is keeping it simple
 # as fields are configurable via settings.py
-IPWARE_PRIVATE_IP_PREFIX = getattr(settings,
-    'IPWARE_PRIVATE_IP_PREFIX', (
+IPWARE_PRIVATE_IP_PREFIX = (
         '0.',  # externally non-routable
         '10.',  # class A private block
         '169.254.',  # link-local block
@@ -44,7 +38,6 @@ IPWARE_PRIVATE_IP_PREFIX = getattr(settings,
         'fe80:',  # link-local unicast
         'ff00:',  # IPv6 multicast
     )
-)
 
 IPWARE_LOOPBACK_PREFIX = (
     '127.',  # IPv4 loopback device
